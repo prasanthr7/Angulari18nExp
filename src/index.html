@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -6,9 +6,27 @@
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<script src="./utility.js" type="text/javascript"></script>-->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        .democlass {
+            color: red;
+        }
+    </style>
 </head>
 <body>
+    <script>
+        // document.locale = 'hi';
+    </script>
+    
   <app-root></app-root>
 </body>
+<script>
+
+  //  document.getElementById("test").setAttribute("i18n", "@@message"); foolish 
+
+   function getMessageId(){
+        return "@@message";
+    }
+</script>
 </html>

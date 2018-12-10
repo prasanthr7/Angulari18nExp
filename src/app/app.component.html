@@ -1,9 +1,104 @@
 <!--The content below is only a placeholder and can be replaced.-->
+
 <div style="text-align:center">
   <h1>
     Welcome to {{title}}!
   </h1>
   <img width="300" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=">
+</div>
+<div>
+    <h1>Route From here</h1>
+    <nav>
+        <ul>
+            <li>
+                <a routerLink="/step1" >Step1</a>
+            </li>
+            <li>
+                <a routerLink="/step2">Step2</a>
+            </li>
+            <li>
+                <a routerLink="/step3">Step3</a>
+            </li>
+        </ul>
+    </nav>
+    <input type="button" (click)="callFun()"  value="Call" /><br/>
+    <input type="text" name="lang" [(ngModel)]="lang" required  ><br/>
+    <input type="button" (click)="changeLang(lang)"  value="Change Language" />
+    <router-outlet></router-outlet>
+</div>
+<form novalidate #f="ngForm" (ngSubmit)="save(f.value, f.valid)" >
+    <div>
+
+       
+        <div>
+            <label>Name</label>
+            <input type="text" name="name" [(ngModel)]="user.name" required #name="ngModel" >
+            <div [hidden]="name.valid || (!name.touched && !f.submitted)">
+                Name is required
+            </div>
+           
+        </div>
+        <div>
+            <label>Email</label>
+            <input type="text" name="email" [(ngModel)]="user.email" #email="ngModel" required>
+            <div [hidden]="email.valid || (!email.touched && !f.submitted)">
+                email is required
+            </div>
+        </div>
+
+        <div>
+            <!-- (keypress)="validateOnlyNumbers($event)" -->
+            <label>currency</label>
+            <input type="text" name="currency1" [(ngModel)]="user.currency"  #cur="ngModel" required pattern="\d+.?\d{0,2}" maxlength="13" (keypress)="validateOnlyNumbers($event)" (blur)="convertToCurrencyFormat($event)" >
+            <div [hidden]="cur.valid || (!cur.touched && !f.submitted)">
+                Currency is required {{cur.value}}
+            </div>
+
+        </div>
+        <div>
+            <label>Address</label>
+            <input type="text" name="addess" [(ngModel)]="user.address" #address="ngModel" required pattern="^[^-\s]([a-zA-Z0-9_\s-])*[\S]$">
+            <div [hidden]="address.valid || (!address.touched && !f.submitted)">
+                Invalid address. check address entered
+            </div>
+        </div>
+        
+       
+        
+    </div>
+    <div style="padding:10px;">
+        <input type="reset" value="Cancel" />
+        <input type="submit" value="Save" (mouseup)="mouseUp()" (mousedown)="mouseDown($event)" (click)="Click()" />
+    </div>
+</form>
+<h1>Custom Trnsilation to {{locale}}</h1>
+<h1>{{day | CustomTranslate:locale}}</h1>
+<h1 i18n>This is in English</h1>
+<h2 i18n>This is in English</h2>
+<button i18n>This is in English</button>
+<br /><br />
+
+Type some Text:<input type="text" (keypress)="checkAlfa($event)" [(ngModel)]="message" />
+<br />
+You typed:<span>{{message}}</span>
+<select i18n>
+    <option>Sun</option>
+    <option>Mon</option>
+    <option>Tue</option>
+</select>
+
+<div>
+    <span i18n="@@message">This is some other message</span>
+    <br />
+    <span i18n="@@message">This is some other message</span>
+    <br />
+    <span i18n="@@message">{{message}}</span>
+    <br />
+    <span i18n="@@message" [class]="message"></span>
+    <span i18n>{{baseMessage}}</span>
+    <br />
+    message id with attribute
+    <span id="test">{{message}}</span>
 </div>
 <h2>Here are some links to help you start: </h2>
 <ul>
